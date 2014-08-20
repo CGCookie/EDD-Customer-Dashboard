@@ -51,8 +51,12 @@ class EDD_Customer_Dashboard {
 	 */
 	private function __construct() {
 
+
+		require_once( plugin_dir_path( __FILE__ ). '../includes/process-avatar.php' );
+
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+
 
 		// Load public-facing style sheet and JavaScript.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
@@ -145,7 +149,7 @@ class EDD_Customer_Dashboard {
 
 			<?php
 		} else {
-			echo edd_login_form( get_permalink() );
+			echo do_shortcode( '[edd_login redirect="'.the_permalink().'"]' );
 		}
 
 		$dashboard = ob_get_clean();
@@ -206,6 +210,7 @@ class EDD_Customer_Dashboard {
 
 			case 'profile' :
 				echo '<h2>' . __( 'Profile','edd_customer_dashboard') . '</h2>';
+				$this->custom_avatar();
 				echo do_shortcode( '[edd_profile_editor]' );
 			break;
 
@@ -242,6 +247,39 @@ class EDD_Customer_Dashboard {
 		$dashboard_content = ob_get_clean();
 
 		return $dashboard_content;
+
+	}
+
+	public function custom_avatar(){
+
+		?>
+			<form class="edd_form" action="#profile-information" method="POST" id="profile-form">
+				<fieldset>
+					<span id="edd_profile_name_label"><legend>Change your Avatar</legend></span>
+						<p class="profile-image-upload">
+							<label for="profile_image" class="profile-label">
+								<?php
+								$avatar = get_user_meta(get_current_user_id(), 'profile_avatar_image', true);
+
+								if($avatar) {
+									echo '<img src="' . $avatar . '"/>';
+								}
+
+								?>
+								<span class="profile-image-upload-note"><strong>Custom Avatar</strong> - For best results, use a square image sized at least 150px x 150px.</span>
+							</label>
+							<input type="file" name="profile_avatar_img" id="profile_avatar_img"/>
+						</p>
+						<p id="profile-submit" class="clear">
+							<input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>"/>
+							<input type="hidden" name="action" value="update_profile"/>
+							<input type="hidden" name="profile_nonce" value="<?php echo wp_create_nonce('profile-nonce'); ?>"/>
+							<input type="submit" name="save_profile" value="Save Avatar"/>
+						</p>
+				</fieldset>
+
+			</form>
+		<?php
 
 	}
 
