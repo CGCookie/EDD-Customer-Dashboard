@@ -1,0 +1,32 @@
+{
+   	"name": "cgcookie/edd-customer-dashboard",
+   	"type": "wordpress-plugin",
+	"description": "Adds a customer dashboard for EDD/FES customers",
+	"keywords": [ "edd", "fes", "customer", "plugin"],
+	"homepage": "http://cgcookie.com",
+	"authors": [
+	    {
+	      	"name": "Nick Haskins",
+	      	"email": "nick@cgcookie.com",
+	      	"homepage": "http://cgcookie.com"
+	    },
+	    {
+	        "name": "Josh Mallard",
+	        "email": "josh@limecuda.com",
+	        "homepage": "http://limecuda.com"
+      },
+	    {
+	      	"name": "Wes Burke",
+	      	"email": "wes@cgcookie.com",
+	      	"homepage": "http://cgcookie.com"
+	    },
+	   	{
+	      	"name": "Jonathan Williamson",
+	      	"email": "jonathan@cgcookie.com",
+	      	"homepage": "http://cgcookie.com"
+	    }
+	],
+   	"require": {
+     	"composer/installers": "~1.0.6"
+   	}
+}
