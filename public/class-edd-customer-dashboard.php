@@ -210,7 +210,7 @@ class EDD_Customer_Dashboard {
 
 			case 'profile' :
 				echo '<h2>' . __( 'Profile','edd_customer_dashboard') . '</h2>';
-				$this->custom_avatar();
+				//$this->custom_avatar();
 				echo do_shortcode( '[edd_profile_editor]' );
 			break;
 
